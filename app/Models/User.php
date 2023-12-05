@@ -64,4 +64,16 @@ class User extends Authenticatable implements JWTSubject
     public function status(){
         return $this->hasOne(Status::class, 'user_id', 'id');
     }
+
+    public function progressInfo(){
+        return $this->hasMany(ProgressInfo::class, 'user_id', 'id');
+    }
+
+    public function progressImages(){
+        return $this->hasMany(ProgressImage::class, 'user_id', 'id');
+    }
+
+    public function nutritionalInfo(){
+        return $this->hasOne(CustomerNutritionalInfos::class, 'user_id', 'id');
+    }
 }

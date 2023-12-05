@@ -25,8 +25,6 @@ class AddCustomerController extends Controller
             // $image = $request->file('main_image')->store('uploads/images/'.$request->name, ['disk' => 'public']);
             $image = $request->file('image')->store('uploads/images/customer/' . $request->name . $request->phone, 'public');
         }
-
-
         try {
             DB::beginTransaction();
             $user = User::create([

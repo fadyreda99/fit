@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Customer\AddCustomerController;
 use App\Http\Controllers\Customer\AllCustomersController;
+use App\Http\Controllers\Customer\CalculateNutritionalInfoController;
 use App\Http\Controllers\Customer\DeleteCustomerController;
 use App\Http\Controllers\Customer\GetCustomerController;
 use App\Http\Controllers\Customer\UpdateStatusCustomerController;
@@ -51,5 +52,6 @@ Route::group([
     Route::get('all', [AllCustomersController::class, 'all']);
     Route::get('get/{user_id}', [GetCustomerController::class, 'get']);
     Route::post('update-status', [UpdateStatusCustomerController::class, 'updateStatus']);
+    Route::post('calculate-nutrition', [CalculateNutritionalInfoController::class, 'calculate']);
 
 });
