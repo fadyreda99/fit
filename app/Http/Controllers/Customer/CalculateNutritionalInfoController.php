@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\CalculateNutritionInfoRequest;
+use App\Http\Resources\Customer\NutritionalInfoResource;
 use App\Models\CustomerMacros;
 use App\Models\CustomerNutritionalInfos;
 use App\Models\User;
@@ -89,6 +90,6 @@ class CalculateNutritionalInfoController extends Controller
 
         DB::commit();
         // return $customer_nutritional_info->with('macros');
-        return $customer_macros;
+        return new NutritionalInfoResource($customer_nutritional_info);
     }
 }
