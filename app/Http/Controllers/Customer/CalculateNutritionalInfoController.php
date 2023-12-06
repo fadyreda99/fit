@@ -7,6 +7,7 @@ use App\Http\Requests\Customer\CalculateNutritionInfoRequest;
 use App\Http\Resources\Customer\NutritionalInfoResource;
 use App\Models\CustomerMacros;
 use App\Models\CustomerNutritionalInfos;
+use App\Models\ProgressInfo;
 use App\Models\User;
 use App\Services\Customer\NutritionCalculator;
 use App\Traits\TransactionsTrait;
@@ -61,6 +62,7 @@ class CalculateNutritionalInfoController extends Controller
                 $request->protien_factor,
                 $this->fats_to_eat
             );
+                
             $data = json_decode($result->getContent(), true);
 
         DB::beginTransaction();
@@ -86,6 +88,16 @@ class CalculateNutritionalInfoController extends Controller
             'carb_in_kcals' => $data['carb_in_kcals'],
             'fat_in_grams' => $data['fat_in_grams'],
             'fat_in_kcals' => $data['fat_in_kcals']
+        ]);
+
+
+        $progressInfo = ProgressInfo::create([
+            'user_id'=>$user->id,
+            'current_weight'=>$user->basicInfo->weight,
+            'current_body_fat'=>$user->basicInfo->body_fat,
+            'current_excess_fat'=>$this->excess_fat,
+            'current_LBM'=>$data['LBM'],
+            'current_FFM'=>$data['FFM'],
         ]);
 
         DB::commit();

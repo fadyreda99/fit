@@ -89,10 +89,17 @@ trait TransactionsTrait
         $precntage_ffm = ($this->weight * ($this->body_fat / 100));
         $this->FFM = round(($this->weight) - $precntage_ffm);
     }
+    public function currentFfm($weight, $body_fat)
+    {
+        $precntage_ffm = ($weight * ($body_fat / 100));
+        return $FFM = round(($weight) - $precntage_ffm);
+    }
 
     public function excessFat($body_fat, $gender_fat)
     {
-        return $excess_fat = $body_fat - $gender_fat;
+        $excess_fat = $body_fat - $gender_fat;
+        $excess_fat = $excess_fat > 0 ? $excess_fat : 0;
+        return $excess_fat;
     }
 
     public function lbm()
@@ -100,6 +107,12 @@ trait TransactionsTrait
         // return $this->excess_fat;
         $precntage_lbm = ($this->weight * ($this->excess_fat / 100));
         $this->LBM = round($this->weight - $precntage_lbm);
+    }
+    public function currentLbm($weight, $excess_fat)
+    {
+        // return $this->excess_fat;
+        $precntage_lbm = ($weight * ($excess_fat / 100));
+        return $LBM = round($weight - $precntage_lbm);
     }
 
     public function bmr()
@@ -123,7 +136,6 @@ trait TransactionsTrait
                 $this->target_amr  = round($this->AMR - $this->kcals_I_D);
                 break;
         }
-        // return $result;
     }
 
     public function protirnInGrams()

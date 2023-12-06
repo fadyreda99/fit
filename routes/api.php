@@ -6,6 +6,7 @@ use App\Http\Controllers\Customer\AllCustomersController;
 use App\Http\Controllers\Customer\CalculateNutritionalInfoController;
 use App\Http\Controllers\Customer\DeleteCustomerController;
 use App\Http\Controllers\Customer\GetCustomerController;
+use App\Http\Controllers\Customer\ProgresInfoController;
 use App\Http\Controllers\Customer\UpdateStatusCustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -53,5 +54,6 @@ Route::group([
     Route::get('get/{user_id}', [GetCustomerController::class, 'get']);
     Route::post('update-status', [UpdateStatusCustomerController::class, 'updateStatus']);
     Route::post('calculate-nutrition', [CalculateNutritionalInfoController::class, 'calculate']);
+    Route::post('add-progressing', [ProgresInfoController::class, 'progressInfo']);
 
 });
