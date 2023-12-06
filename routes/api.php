@@ -9,6 +9,7 @@ use App\Http\Controllers\Customer\GetCustomerController;
 use App\Http\Controllers\Customer\ProgresInfoController;
 use App\Http\Controllers\Customer\ProgressImagesController;
 use App\Http\Controllers\Customer\UpdateStatusCustomerController;
+use App\Http\Controllers\Membership\AddMembershipController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -57,5 +58,15 @@ Route::group([
     Route::post('calculate-nutrition', [CalculateNutritionalInfoController::class, 'calculate']);
     Route::post('add-progressing', [ProgresInfoController::class, 'progressInfo']);
     Route::post('add-images', [ProgressImagesController::class, 'addImages']);
+
+});
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'membership'
+
+], function () {
+    Route::post('add', [AddMembershipController::class, 'add']);
 
 });

@@ -76,4 +76,8 @@ class User extends Authenticatable implements JWTSubject
     public function nutritionalInfo(){
         return $this->hasOne(CustomerNutritionalInfos::class, 'user_id', 'id');
     }
+
+    public function membership(){
+        return $this->hasOne(Membership::class, 'user_id', 'id');
+    }
 }
