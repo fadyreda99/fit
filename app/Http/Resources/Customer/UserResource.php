@@ -24,6 +24,7 @@ class UserResource extends JsonResource
             'status' => new StatusResource($this->status),
             'nutritional_info' => new NutritionalInfoResource($this->nutritionalInfo),
             'progress_info' =>  ProgressInfoResource::collection($this->progressInfo),
+            'progress_images' =>  ProgressImagesResource::collection($this->progressImages),
 
         ];
     }
