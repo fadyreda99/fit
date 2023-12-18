@@ -11,7 +11,7 @@ class GetToDayFollowUpsController extends Controller
 {
     public function getToDayFollowUps()
     {
-        $follow_ups = FollowUp::where('followup_date', now()->toDateString())->get();
+        $follow_ups = FollowUp::where('followup_date', now()->toDateString())->whereStatus('pending')->get();
         return FollowUpWithUserResource::collection($follow_ups);
     }
 }
