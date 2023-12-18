@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Customer;
 
+use App\Http\Resources\Note\NoteResource;
 use App\Http\Resources\Status\StatusResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -25,6 +26,7 @@ class UserResource extends JsonResource
             'nutritional_info' => new NutritionalInfoResource($this->nutritionalInfo),
             'progress_info' =>  ProgressInfoResource::collection($this->progressInfo),
             'progress_images' =>  ProgressImagesResource::collection($this->progressImages),
+            'notes'=>NoteResource::collection($this->notes)
 
         ];
     }

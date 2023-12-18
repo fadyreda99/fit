@@ -58,6 +58,7 @@ class AddCustomerController extends Controller
             DB::commit();
             return new UserResource($user);
         } catch (Exception $e) {
+            DB::rollBack();
             return $e;
         }
     }

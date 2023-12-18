@@ -80,4 +80,12 @@ class User extends Authenticatable implements JWTSubject
     public function membership(){
         return $this->hasOne(Membership::class, 'user_id', 'id');
     }
+
+    public function notes(){
+        return $this->hasMany(Note::class, 'user_id', 'id');
+    }
+
+    public function followUps(){
+        return $this->hasMany(FollowUp::class, 'user_id', 'id');
+    }
 }

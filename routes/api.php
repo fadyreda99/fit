@@ -9,7 +9,15 @@ use App\Http\Controllers\Customer\GetCustomerController;
 use App\Http\Controllers\Customer\ProgresInfoController;
 use App\Http\Controllers\Customer\ProgressImagesController;
 use App\Http\Controllers\Customer\UpdateStatusCustomerController;
+use App\Http\Controllers\FollowUps\AddFollowUpController;
+use App\Http\Controllers\FollowUps\DeleteFollowUpController;
+use App\Http\Controllers\FollowUps\GetAllFollowUpsController;
+use App\Http\Controllers\FollowUps\GetToDayFollowUpsController;
+use App\Http\Controllers\FollowUps\UpdateFollowUpStatusController;
 use App\Http\Controllers\Membership\AddMembershipController;
+use App\Http\Controllers\Membership\UpdateMembershipController;
+use App\Http\Controllers\Note\AddCustomerNoteController;
+use App\Http\Controllers\Note\DeleteCustomerNoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +48,6 @@ Route::group([
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
-
 });
 
 
@@ -58,7 +65,6 @@ Route::group([
     Route::post('calculate-nutrition', [CalculateNutritionalInfoController::class, 'calculate']);
     Route::post('add-progressing', [ProgresInfoController::class, 'progressInfo']);
     Route::post('add-images', [ProgressImagesController::class, 'addImages']);
-
 });
 
 Route::group([
@@ -68,5 +74,25 @@ Route::group([
 
 ], function () {
     Route::post('add', [AddMembershipController::class, 'add']);
+    Route::post('update', [UpdateMembershipController::class, 'update']);
+});
 
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'note'
+], function () {
+    Route::post('add', [AddCustomerNoteController::class, 'addNote']);
+    Route::post('delete', [DeleteCustomerNoteController::class, 'delete']);
+});
+
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'follow-ups'
+], function () {
+    Route::post('add', [AddFollowUpController::class, 'add']);
+    Route::post('update-status', [UpdateFollowUpStatusController::class, 'updateStatus']);
+    Route::post('delete', [DeleteFollowUpController::class, 'delete']);
+    Route::get('today-followup', [GetToDayFollowUpsController::class, 'getToDayFollowUps']);
+    Route::get('all-followup', [GetAllFollowUpsController::class, 'all']);
 });
