@@ -9,11 +9,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
@@ -26,7 +21,8 @@ class UserResource extends JsonResource
             'nutritional_info' => new NutritionalInfoResource($this->nutritionalInfo),
             'progress_info' =>  ProgressInfoResource::collection($this->progressInfo),
             'progress_images' =>  ProgressImagesResource::collection($this->progressImages),
-            'notes'=>NoteResource::collection($this->notes)
+            'notes' => NoteResource::collection($this->notes),
+
 
         ];
     }

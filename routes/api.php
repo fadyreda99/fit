@@ -8,12 +8,18 @@ use App\Http\Controllers\Customer\DeleteCustomerController;
 use App\Http\Controllers\Customer\GetCustomerController;
 use App\Http\Controllers\Customer\ProgresInfoController;
 use App\Http\Controllers\Customer\ProgressImagesController;
+use App\Http\Controllers\Customer\UpdateBasicAndNutretionalInfoController;
 use App\Http\Controllers\Customer\UpdateStatusCustomerController;
 use App\Http\Controllers\FollowUps\AddFollowUpController;
 use App\Http\Controllers\FollowUps\DeleteFollowUpController;
 use App\Http\Controllers\FollowUps\GetAllFollowUpsController;
 use App\Http\Controllers\FollowUps\GetToDayFollowUpsController;
 use App\Http\Controllers\FollowUps\UpdateFollowUpStatusController;
+use App\Http\Controllers\FoodType\AddFoodTypeController;
+use App\Http\Controllers\FoodType\DeleteFoodTypeController;
+use App\Http\Controllers\foodType\GetAllFoodTypeController;
+use App\Http\Controllers\FoodType\GetFoodTypeController;
+use App\Http\Controllers\FoodType\UpdateFoodTypeController;
 use App\Http\Controllers\Membership\AddMembershipController;
 use App\Http\Controllers\Membership\UpdateMembershipController;
 use App\Http\Controllers\Note\AddCustomerNoteController;
@@ -65,6 +71,7 @@ Route::group([
     Route::post('calculate-nutrition', [CalculateNutritionalInfoController::class, 'calculate']);
     Route::post('add-progressing', [ProgresInfoController::class, 'progressInfo']);
     Route::post('add-images', [ProgressImagesController::class, 'addImages']);
+    Route::post('update', [UpdateBasicAndNutretionalInfoController::class, 'update']);
 });
 
 Route::group([
@@ -95,4 +102,15 @@ Route::group([
     Route::post('delete', [DeleteFollowUpController::class, 'delete']);
     Route::get('today-followup', [GetToDayFollowUpsController::class, 'getToDayFollowUps']);
     Route::get('all-followup', [GetAllFollowUpsController::class, 'all']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'food-types'
+], function () {
+    Route::post('add', [AddFoodTypeController::class, 'add']);
+    Route::post('update', [UpdateFoodTypeController::class, 'update']);
+    Route::post('delete', [DeleteFoodTypeController::class, 'delete']);
+    Route::get('all', [GetAllFoodTypeController::class, 'all']);
+    Route::get('get/{type_id}', [GetFoodTypeController::class, 'get']);
 });
